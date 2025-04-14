@@ -1,0 +1,9 @@
+GlobalPlanner:
+  use_dijkstra: true          # 或 false = A*，推荐先用 Dijkstra
+  use_quadratic: true         # 更平滑路径评分
+  use_grid_path: false
+  allow_unknown: true         # 是否允许穿越未知区域
+
+  cost_factor: 0.55        # ✅ 越大越“怕障碍”,original 0.55
+  neutral_cost: 66            # 基础代价
+  lethal_cost: 253            # 不可通行区域

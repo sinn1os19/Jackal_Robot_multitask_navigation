@@ -1,0 +1,34 @@
+TrajectoryPlannerROS:
+  # Jackal velocity limits
+  max_vel_x: 2.0
+  min_vel_x: 0.1
+  max_vel_theta: 2.0
+  min_in_place_vel_theta: 0.5
+
+  # Jackal acceleration limits
+  acc_lim_theta: 3.0
+  acc_lim_x: 2.0
+  acc_lim_y: 0.0  # Non-holonomic robot
+
+  holonomic_robot: false
+
+  # Goal tolerance
+  xy_goal_tolerance: 0.2
+  yaw_goal_tolerance: 0.25
+  
+  # Forward simulation parameters
+  sim_time: 1.5
+  sim_granularity: 0.025
+  vx_samples: 8
+  vtheta_samples: 20
+  
+  # Trajectory scoring parameters
+  pdist_scale: 0.6
+  gdist_scale: 0.8
+  occdist_scale: 0.01
+  
+  # Oscillation prevention
+  oscillation_reset_dist: 0.25
+  
+  # Use DWA planner which works well for Jackal
+  dwa: true

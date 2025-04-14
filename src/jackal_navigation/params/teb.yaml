@@ -1,0 +1,44 @@
+TebLocalPlannerROS:
+
+  ## Robot configuration
+  max_vel_x: 2.5
+  max_vel_x_backwards: 0.4
+  max_vel_theta: 0.5
+  acc_lim_x: 0.8
+  acc_lim_theta: 2.0
+
+
+  ## Goal tolerance
+  xy_goal_tolerance: 0.2
+  yaw_goal_tolerance: 0.1
+  free_goal_vel: false
+
+  ## Obstacle avoidance
+  min_obstacle_dist: 0.5
+  inflation_dist: 0.55
+  include_costmap_obstacles: true
+  costmap_obstacles_behind_robot_dist: 1.0
+  obstacle_poses_affected: 15
+
+  ## Optimization weights
+  weight_obstacle: 50.0
+  weight_inflation: 0.3
+  weight_kinematics_forward_drive: 5.0
+  weight_kinematics_turning_radius: 1.0
+  weight_velocity_obstacle_ratio: 1.0
+  weight_shortest_path: 0.1
+
+  ## Kinematics
+  kinematics_diff_drive: true
+  min_turning_radius: 0.0      # Jackal 可以原地转
+  allow_init_with_backwards_motion: false
+
+  ## Trajectory
+  teb_autosize: true
+  dt_ref: 0.3
+  dt_hysteresis: 0.05
+  global_plan_overwrite_orientation: true
+  max_global_plan_lookahead_dist: 3.0
+  global_plan_viapoint_sep: 0.5
+  switch_blocking_period: 0.0
+

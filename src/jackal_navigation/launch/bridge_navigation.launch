@@ -1,0 +1,3 @@
+<launch>
+  <node name="bridge_navigation" pkg="jackal_navigation" type="bridge_navigation.py" output="screen" />
+</launch>

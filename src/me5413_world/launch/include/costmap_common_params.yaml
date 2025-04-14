@@ -1,0 +1,18 @@
+obstacle_range: 5.0
+raytrace_range: 6.0
+# Jackal footprint (rectangle approximately 0.508m x 0.430m)
+footprint: [[-0.254, -0.215], [-0.254, 0.215], [0.254, 0.215], [0.254, -0.215]]
+inflation_radius: 0.55
+transform_tolerance: 0.5
+
+observation_sources: laser_scan_sensor
+
+laser_scan_sensor: {
+  sensor_frame: front_laser,
+  data_type: LaserScan,
+  topic: front/scan,
+  marking: true,
+  clearing: true,
+  min_obstacle_height: 0.0,
+  max_obstacle_height: 1.0
+}

@@ -1,0 +1,47 @@
+TebLocalPlannerROS:
+
+  #### 1. 速度与加速度设置 ####
+  max_vel_x: 1                 # 最大线速度（前进），Jackal 推荐不超过 0.8 m/s
+  max_vel_theta: 0.5             # 最大角速度（旋转）
+  acc_lim_x: 0.5                 # 最大线加速度
+  acc_lim_theta: 0.3             # 最大角加速度
+
+  #### 2. 目标点接近判定 ####
+  xy_goal_tolerance: 0.2         # 到达目标位置的距离容忍（米）
+  yaw_goal_tolerance: 0.2        # 到达目标朝向的角度容忍（弧度）
+  latch_xy_goal_tolerance: true  # 一旦达到容忍范围后，保持成功状态，不再微调
+
+  #### 3. 避障设置 ####
+  min_obstacle_dist: 0.4        # 小车与障碍物之间的最小距离（考虑 footprint 外边界）
+  inflation_dist: 0.55           # TEB 内部优化时用于障碍影响区域（配合 costmap）
+
+  #### 4. 倒车支持 ####
+  weight_kinematics_forward_drive: 1  # 设置为 0 允许 TEB 优化器自由决定是否倒车
+  allow_init_with_backwards_motion: true # 启动阶段允许倒车起步（推荐开启）
+
+  #### 5. 轨迹优化参数（权重）####
+  weight_obstacle: 100.0           # 避障代价权重，值越大越远离障碍物
+  weight_viapoint: 1.0            # 如果有 viapoints，越大越贴近参考点
+  min_turning_radius: 0.8                # 限制最小转弯半径（单位米）
+  weight_kinematics_turning_radius: 1.0  # 尝试限制最小转弯半径（前轮转向车较重要）
+  weight_kinematics_nh: 1.0   # 减少非全向运动限制惩罚（允许小角度反向起步）
+  weight_optimaltime: 1.0         # 越大越鼓励短时间到达目标
+  weight_shortest_path: 0.0       # 控制是否偏向走最短路径（通常由优化时间决定）
+
+
+  #### 6. 控制时间设置 ####
+  dt_ref: 0.3                     # TEB 轨迹的参考时间分辨率（单位：秒）
+  dt_hysteresis: 0.1              # 用于控制时间变化的容忍范围，避免频繁调整
+  max_samples: 500                # 最大轨迹样本数（控制计算复杂度）
+
+  #### 7. 优化迭代控制 ####
+  no_inner_iterations: 5          # 每次规划内部迭代次数
+  no_outer_iterations: 3          # 外部迭代次数（路径整体优化）
+
+  #### 8. 全局路径跟踪设置 ####
+  global_plan_overwrite_orientation: true   # 是否使用全局路径中的朝向信息（推荐开启）
+  max_global_plan_lookahead_dist: 5.0       # 最大向前查看全局路径的距离（米）
+
+  #### 9. 异常处理策略 ####
+  shrink_horizon_backup: true     # 如果终点卡住，缩短路径 horizon 尝试重规划
+  oscillation_recovery: true      # 如果出现小车来回抖动，触发恢复行为
